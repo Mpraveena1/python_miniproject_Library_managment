@@ -1,0 +1,96 @@
+class Book:
+    def __init__(self, book_id, title, author):
+      self.book_id = book_id
+      self.title = title
+      self.author = author
+      self.available = True
+
+
+    def __str__(self):
+        return f"{self.book_id} - {self.title} by {self.author} ({'Available' if self.available else 'Not Available'})"
+
+class Library:
+    def __init__(self):
+        self.books = []
+
+    def add_book(self, book):
+        self.books.append(book)
+
+    def display_books(self):
+        if not self.books:
+            print("No books.")
+        for b in self.books:
+            print(b)
+
+    def borrow_book(self, book_id):
+        for b in self.books:
+            if b.book_id == book_id:
+                if b.available:
+                    b.available = False
+                    print("Borrowed:", b.title)
+                else:
+                    print("Already borrowed.")
+                return
+        print("Book not found.")
+
+    def return_book(self, book_id):
+        for b in self.books:
+            if b.book_id == book_id:
+                if not b.available:
+                    b.available = True
+                    print("Returned:", b.title)
+                else:
+                    print("Book was not borrowed.")
+                return
+        print("Book not found.")
+
+
+library = Library()
+
+while True:
+     print("\n1.Add  2.Show  3.Borrow  4.Return  5.Exit")
+     choice = input("Choice: ")
+
+
+     if choice == "1":
+         bid = input("ID: ")
+         title = input("Title: ")
+         author = input("Author: ")
+         library.add_book(Book(bid, title, author))
+
+     elif choice == "2":
+         library.display_books()
+
+     elif choice == "3":
+         bid = input("Enter Book ID: ")
+         library.borrow_book(bid)
+
+     elif choice == "4":
+         bid = input("Enter Book ID: ")
+         library.return_book(bid)
+
+     elif choice == "5":
+         print("Goodbye!")
+         break
+     
+     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+             
+
+          
+       
+        
+ 
